@@ -136,7 +136,7 @@ export default function RegistrationModal({ isOpen, onClose }: RegistrationModal
 
                     {/* Content */}
                     <div className="text-center">
-                        <div className="w-16 h-16 bg-green-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <div className="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center mx-auto mb-4">
                             <User size={32} className="text-white" />
                         </div>
 
@@ -150,7 +150,7 @@ export default function RegistrationModal({ isOpen, onClose }: RegistrationModal
                         {/* Features */}
                         <div className="grid grid-cols-1 gap-3 mb-6 text-left">
                             <div className="flex items-center gap-3 p-3 bg-slate-800/50 rounded-lg">
-                                <Activity className="text-green-400 flex-shrink-0" size={20} />
+                                <Activity className="text-blue-400 flex-shrink-0" size={20} />
                                 <div>
                                     <p className="text-sm font-medium text-white">Track Your Journey</p>
                                     <p className="text-xs text-slate-400">Build XP streaks and health scores</p>
@@ -191,14 +191,14 @@ export default function RegistrationModal({ isOpen, onClose }: RegistrationModal
                         </button>
 
                         {registrationResult && (
-                            <div className={`p-3 rounded-lg border ${registrationResult.success ? 'border-green-500/50 bg-green-900/20' : 'border-red-500/50 bg-red-900/20'}`}>
+                            <div className={`p-3 rounded-lg border ${registrationResult.success ? 'border-blue-500/50 bg-blue-900/20' : 'border-red-500/50 bg-red-900/20'}`}>
                                 <div className="flex items-center gap-2 mb-1">
                                     {registrationResult.success ? (
-                                        <CheckCircle size={16} className="text-green-400" />
+                                        <CheckCircle size={16} className="text-blue-400" />
                                     ) : (
                                         <AlertCircle size={16} className="text-red-400" />
                                     )}
-                                    <span className={`font-medium ${registrationResult.success ? 'text-green-400' : 'text-red-400'}`}>
+                                    <span className={`font-medium ${registrationResult.success ? 'text-blue-400' : 'text-red-400'}`}>
                                         {registrationResult.success ? 'Success!' : 'Error'}
                                     </span>
                                 </div>

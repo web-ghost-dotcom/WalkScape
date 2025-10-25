@@ -171,7 +171,7 @@ export default function Garden() {
         return (
             <div className="space-y-6">
                 <div className="text-center">
-                    <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-green-500 mx-auto"></div>
+                    <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-500 mx-auto"></div>
                     <p className="text-slate-400 mt-2">Loading your garden...</p>
                 </div>
             </div>
@@ -182,7 +182,7 @@ export default function Garden() {
         <div className="space-y-6">
             {/* Header */}
             <div className="text-center">
-                <div className="w-16 h-16 bg-green-600 rounded-full flex items-center justify-center mx-auto mb-4 animate-float">
+                <div className="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center mx-auto mb-4 animate-float">
                     <Flower2 size={32} className="text-white" />
                 </div>
                 <h2 className="text-xl font-bold mb-2">My Garden</h2>
@@ -196,7 +196,7 @@ export default function Garden() {
                 <button
                     onClick={() => setActiveTab('pets')}
                     className={`flex-1 py-2 px-4 rounded-md text-sm font-medium transition-all duration-300 ${activeTab === 'pets'
-                        ? 'bg-green-600 text-white animate-pulse-soft'
+                        ? 'bg-blue-600 text-white animate-pulse-soft'
                         : 'text-slate-400 hover:text-white'
                         }`}
                 >
@@ -206,7 +206,7 @@ export default function Garden() {
                 <button
                     onClick={() => setActiveTab('artifacts')}
                     className={`flex-1 py-2 px-4 rounded-md text-sm font-medium transition-all duration-300 ${activeTab === 'artifacts'
-                        ? 'bg-green-600 text-white animate-pulse-soft'
+                        ? 'bg-blue-600 text-white animate-pulse-soft'
                         : 'text-slate-400 hover:text-white'
                         }`}
                 >
@@ -242,7 +242,7 @@ export default function Garden() {
                                         disabled={!canMintPet() || isMinting}
                                         className={`pet-card p-3 text-center disabled:opacity-50 disabled:cursor-not-allowed hover:transform hover:scale-105 transition-transform duration-300 animate-fade-in delay-${index * 100}`}
                                     >
-                                        <IconComponent size={24} className="mx-auto mb-1 text-green-400 animate-bob" />
+                                        <IconComponent size={24} className="mx-auto mb-1 text-blue-400 animate-bob" />
                                         <div className="text-xs">{pet.name}</div>
                                     </button>
                                 );
@@ -272,7 +272,7 @@ export default function Garden() {
                                     >
                                         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-3">
                                             <div className="flex items-center gap-3 mb-2 sm:mb-0">
-                                                <div className="w-10 h-10 bg-green-600 rounded-full flex items-center justify-center animate-bob">
+                                                <div className="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center animate-bob">
                                                     {petInfo.icon === 'Plant' && <Flower2 size={20} className="text-white" />}
                                                     {petInfo.icon === 'Creature' && <PawPrint size={20} className="text-white" />}
                                                     {petInfo.icon === 'Digital' && <Trophy size={20} className="text-white" />}

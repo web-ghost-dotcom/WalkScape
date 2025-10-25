@@ -307,7 +307,7 @@ export default function Colony() {
         return (
             <div className="space-y-6">
                 <div className="text-center">
-                    <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-green-500 mx-auto"></div>
+                    <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-500 mx-auto"></div>
                     <p className="text-slate-400 mt-2">Loading colony data...</p>
                 </div>
             </div>
@@ -329,7 +329,7 @@ export default function Colony() {
         <div className="space-y-6">
             {/* Header */}
             <div className="text-center">
-                <div className="w-16 h-16 bg-green-600 rounded-full flex items-center justify-center mx-auto mb-4 animate-float">
+                <div className="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center mx-auto mb-4 animate-float">
                     <Users size={32} className="text-white" />
                 </div>
                 <h2 className="text-xl font-bold mb-2">Colonies</h2>
@@ -356,7 +356,7 @@ export default function Colony() {
                 <button
                     onClick={() => setActiveTab('my-colony')}
                     className={`flex-1 py-2 px-4 rounded-md text-sm font-medium transition-all duration-200 ${activeTab === 'my-colony'
-                        ? 'bg-green-600 text-white'
+                        ? 'bg-blue-600 text-white'
                         : 'text-slate-400 hover:text-white'
                         }`}
                 >
@@ -366,7 +366,7 @@ export default function Colony() {
                 <button
                     onClick={() => setActiveTab('discover')}
                     className={`flex-1 py-2 px-4 rounded-md text-sm font-medium transition-all duration-200 ${activeTab === 'discover'
-                        ? 'bg-green-600 text-white'
+                        ? 'bg-blue-600 text-white'
                         : 'text-slate-400 hover:text-white'
                         }`}
                 >
@@ -391,7 +391,7 @@ export default function Colony() {
                                         <p className="text-sm text-slate-400">Colony #{colony.id}</p>
                                     </div>
                                     <div className="text-right">
-                                        <p className="text-xl font-bold text-green-400">
+                                        <p className="text-xl font-bold text-blue-400">
                                             Level {getColonyLevel(colony.total_xp)}
                                         </p>
                                         <p className="text-xs text-slate-400">
@@ -403,7 +403,7 @@ export default function Colony() {
                                 <div className="grid grid-cols-2 gap-4 mb-4">
                                     <div className="stat-card">
                                         <div className="flex items-center gap-2 mb-1">
-                                            <Users size={14} className="text-green-400" />
+                                            <Users size={14} className="text-blue-400" />
                                             <span className="text-sm">Members</span>
                                         </div>
                                         <p className="text-lg font-bold">{Number(colony.member_count)}</p>
@@ -502,7 +502,7 @@ export default function Colony() {
                             {/* Colony Benefits */}
                             <div className="card">
                                 <h4 className="font-bold mb-3 flex items-center gap-2">
-                                    <Trophy size={16} className="text-green-400" />
+                                    <Trophy size={16} className="text-blue-400" />
                                     Colony Benefits
                                 </h4>
                                 <div className="space-y-2 text-sm text-slate-300">
@@ -610,7 +610,7 @@ export default function Colony() {
                                         placeholder="Colony name..."
                                         value={newColonyName}
                                         onChange={(e) => setNewColonyName(e.target.value)}
-                                        className="w-full p-3 bg-slate-700 border border-slate-600 rounded-lg text-white placeholder-slate-400 focus:outline-none focus:border-green-500"
+                                        className="w-full p-3 bg-slate-700 border border-slate-600 rounded-lg text-white placeholder-slate-400 focus:outline-none focus:border-blue-500"
                                         maxLength={31} // felt252 limit
                                     />
 
@@ -650,7 +650,7 @@ export default function Colony() {
                                         placeholder="Colony ID..."
                                         value={joinColonyId}
                                         onChange={(e) => setJoinColonyId(e.target.value)}
-                                        className="w-full p-3 bg-slate-700 border border-slate-600 rounded-lg text-white placeholder-slate-400 focus:outline-none focus:border-green-500"
+                                        className="w-full p-3 bg-slate-700 border border-slate-600 rounded-lg text-white placeholder-slate-400 focus:outline-none focus:border-blue-500"
                                     />
 
                                     <button
@@ -678,7 +678,7 @@ export default function Colony() {
                     {/* Popular Colonies */}
                     <div className="card">
                         <h3 className="font-bold mb-3 flex items-center gap-2">
-                            <Trophy size={16} className="text-green-400" />
+                            <Trophy size={16} className="text-blue-400" />
                             Popular Colonies
                             {isLoadingPopular && <Loader2 size={16} className="animate-spin" />}
                         </h3>

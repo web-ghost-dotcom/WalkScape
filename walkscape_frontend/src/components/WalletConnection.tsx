@@ -170,7 +170,7 @@ export default function WalletConnection({ showRegistration = false }: WalletCon
         return (
             <div className="flex flex-col items-center justify-center p-8 text-center">
                 <div className="mb-6">
-                    <CheckCircle className="h-16 w-16 text-green-500 mx-auto mb-4" />
+                    <CheckCircle className="h-16 w-16 text-blue-500 mx-auto mb-4" />
                     <h2 className="text-2xl font-bold text-white mb-2">Welcome, Explorer!</h2>
                     <p className="text-gray-400">
                         Your wallet is connected and you&apos;re registered to play WalkScape.
@@ -180,8 +180,8 @@ export default function WalletConnection({ showRegistration = false }: WalletCon
                     </p>
                 </div>
 
-                <div className="bg-green-900/20 border border-green-800 rounded-lg p-4 max-w-md">
-                    <div className="flex items-center gap-2 text-green-400 text-sm">
+                <div className="bg-blue-900/20 border border-blue-800 rounded-lg p-4 max-w-md">
+                    <div className="flex items-center gap-2 text-blue-400 text-sm">
                         <Flower2 className="h-4 w-4" />
                         <span>Ready to explore!</span>
                     </div>
@@ -208,7 +208,7 @@ export default function WalletConnection({ showRegistration = false }: WalletCon
                 {!isRegistering && !registrationResult && (
                     <button
                         onClick={handleRegisterPlayer}
-                        className="bg-green-600 hover:bg-green-700 text-white px-8 py-3 rounded-lg font-medium transition-colors flex items-center gap-2"
+                        className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg font-medium transition-colors flex items-center gap-2"
                     >
                         <UserPlus className="h-5 w-5" />
                         Register Player
@@ -224,7 +224,7 @@ export default function WalletConnection({ showRegistration = false }: WalletCon
 
                 {registrationResult && (
                     <div className={`max-w-md p-4 rounded-lg border ${registrationResult.success
-                        ? 'bg-green-900/20 border-green-800 text-green-400'
+                        ? 'bg-blue-900/20 border-blue-800 text-blue-400'
                         : 'bg-red-900/20 border-red-800 text-red-400'
                         }`}>
                         <div className="flex items-start gap-2">

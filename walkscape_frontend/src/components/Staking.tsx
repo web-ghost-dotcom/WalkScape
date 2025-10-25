@@ -128,7 +128,7 @@ export default function Staking() {
         const amt = Number(formatEther(amount));
         if (amt >= 1000) return { tier: 'Legendary', multiplier: 300, color: 'text-gray-300' };
         if (amt >= 500) return { tier: 'Epic', multiplier: 200, color: 'text-gray-400' };
-        if (amt >= 100) return { tier: 'Rare', multiplier: 150, color: 'text-green-400' };
+        if (amt >= 100) return { tier: 'Rare', multiplier: 150, color: 'text-blue-400' };
         if (amt >= 50) return { tier: 'Common', multiplier: 100, color: 'text-gray-500' };
         return { tier: 'None', multiplier: 0, color: 'text-slate-400' };
     };
@@ -178,7 +178,7 @@ export default function Staking() {
         return (
             <div className="space-y-6">
                 <div className="text-center animate-fade-in">
-                    <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-green-500 mx-auto"></div>
+                    <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-500 mx-auto"></div>
                     <p className="text-slate-400 mt-2">Loading staking info...</p>
                 </div>
             </div>
@@ -191,7 +191,7 @@ export default function Staking() {
     return (
         <div className="space-y-6">
             <div className="text-center animate-slide-up">
-                <div className="w-16 h-16 bg-green-600 rounded-full flex items-center justify-center mx-auto mb-4 animate-float">
+                <div className="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center mx-auto mb-4 animate-float">
                     <TrendingUp size={32} className="text-white" />
                 </div>
                 <h2 className="text-xl font-bold mb-2">ETH Growth Staking</h2>
@@ -212,7 +212,7 @@ export default function Staking() {
                             </p>
                         </div>
                         <div className="text-left sm:text-right">
-                            <p className="text-2xl font-bold text-green-400 flex items-center gap-1 justify-start sm:justify-end">
+                            <p className="text-2xl font-bold text-blue-400 flex items-center gap-1 justify-start sm:justify-end">
                                 {formatAmount(stakeInfo.amountStaked)}
                                 <span className="text-sm text-yellow-400 font-medium">ETH</span>
                             </p>
@@ -238,7 +238,7 @@ export default function Staking() {
                             </div>
                             <p className="text-sm font-medium">
                                 {canHarvest() ? (
-                                    <span className="text-green-400 animate-pulse">Ready!</span>
+                                    <span className="text-blue-400 animate-pulse">Ready!</span>
                                 ) : timeUntilHarvest ? (
                                     <span className="text-gray-300">{timeUntilHarvest}</span>
                                 ) : (
@@ -288,7 +288,7 @@ export default function Staking() {
                                 placeholder="Amount of ETH to stake..."
                                 value={stakeAmount}
                                 onChange={(e) => setStakeAmount(e.target.value)}
-                                className="w-full p-3 bg-slate-700 border border-slate-600 rounded-lg text-white placeholder-slate-400 focus:outline-none focus:border-green-500 transition-colors duration-300 pr-12"
+                                className="w-full p-3 bg-slate-700 border border-slate-600 rounded-lg text-white placeholder-slate-400 focus:outline-none focus:border-blue-500 transition-colors duration-300 pr-12"
                                 min="1"
                             />
                             <div className="absolute right-3 top-1/2 transform -translate-y-1/2 flex items-center gap-1">

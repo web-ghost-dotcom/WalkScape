@@ -50,7 +50,7 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
                         {/* Logo and Navigation */}
                         <div className="flex">
                             <div className="flex-shrink-0 flex items-center">
-                                <TreePine className="h-8 w-8 text-green-500 animate-bob" />
+                                <TreePine className="h-8 w-8 text-blue-500 animate-bob" />
                                 <span className="ml-2 text-xl font-bold text-white">WalkScape</span>
                             </div>
 
@@ -64,7 +64,7 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
                                             key={tab.id}
                                             onClick={() => handleNavigate(tab.path)}
                                             className={`px-3 py-2 rounded-md text-sm flex items-center space-x-2 transition-all duration-300 animate-fade-in delay-${index * 100} ${isActive
-                                                ? 'bg-green-600 text-white animate-pulse-soft'
+                                                ? 'bg-blue-600 text-white animate-pulse-soft'
                                                 : 'text-slate-300 hover:text-white hover:bg-slate-700 hover:transform hover:scale-105'
                                                 }`}
                                         >
@@ -108,7 +108,7 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
                                 key={tab.id}
                                 onClick={() => handleNavigate(tab.path)}
                                 className={`p-3 rounded-lg transition-all duration-300 animate-fade-in delay-${index * 100} ${isActive
-                                    ? 'bg-green-600 text-white animate-pulse-soft'
+                                    ? 'bg-blue-600 text-white animate-pulse-soft'
                                     : 'text-slate-400 hover:text-white hover:bg-slate-700 hover:transform hover:scale-110'
                                     }`}
                                 title={tab.label}
