@@ -1327,7 +1327,7 @@ export interface StakeInfo {
 // Contract configuration from environment variables
 export const CONTRACT_ADDRESS = process.env.NEXT_PUBLIC_CONTRACT_ADDRESS!;
 export const RPC_URL = process.env.NEXT_PUBLIC_RPC_URL!;
-export const SUPPORTED_CHAIN_IDS = process.env.NEXT_PUBLIC_SUPPORTED_CHAIN_IDS?.split(',').map(id => parseInt(id.trim())) || [2810]; // Default to Morph Holesky
+export const SUPPORTED_CHAIN_IDS = process.env.NEXT_PUBLIC_SUPPORTED_CHAIN_IDS?.split(',').map(id => parseInt(id.trim())) || [84532]; // Default to Base Sepolia
 
 // Reader fallback provider (let ethers auto-detect network to avoid mismatch errors)
 export const provider = new JsonRpcProvider(RPC_URL);
@@ -1367,13 +1367,13 @@ export enum ArtifactType {
     PIXEL_PLANT = 3
 }
 
-// Morph chain configurations (update/extend if supporting more networks later)
-export const MORPH_HOLESKY_CONFIG = {
-    chainId: 2810,
-    name: 'Morph Holesky Testnet',
+// Base chain configurations
+export const BASE_SEPOLIA_CONFIG = {
+    chainId: 84532,
+    name: 'Base Sepolia',
     currency: 'ETH',
-    explorerUrl: 'https://explorer-holesky.morphl2.io',
+    explorerUrl: 'https://sepolia.basescan.org',
     rpcUrl: RPC_URL
 };
 
-export const SUPPORTED_CHAINS = [MORPH_HOLESKY_CONFIG];
+export const SUPPORTED_CHAINS = [BASE_SEPOLIA_CONFIG];

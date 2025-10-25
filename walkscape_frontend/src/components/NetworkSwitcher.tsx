@@ -5,7 +5,7 @@ import { useWallet } from '@/contexts/WalletContext';
 import { AlertCircle } from 'lucide-react';
 
 export default function NetworkSwitcher() {
-    const { provider, switchToMorphNetwork } = useWallet();
+    const { provider, switchToBaseNetwork } = useWallet();
     const [isWrongNetwork, setIsWrongNetwork] = useState(false);
     const [isSwitching, setIsSwitching] = useState(false);
 
@@ -15,7 +15,7 @@ export default function NetworkSwitcher() {
 
             try {
                 const network = await provider.getNetwork();
-                setIsWrongNetwork(network.chainId !== BigInt(2810));
+                setIsWrongNetwork(network.chainId !== BigInt(84532));
             } catch (error) {
                 console.error('Error checking network:', error);
                 setIsWrongNetwork(true);
@@ -28,7 +28,7 @@ export default function NetworkSwitcher() {
     const handleSwitchNetwork = async () => {
         setIsSwitching(true);
         try {
-            const success = await switchToMorphNetwork();
+            const success = await switchToBaseNetwork();
             if (success) {
                 setIsWrongNetwork(false);
             }
@@ -45,7 +45,7 @@ export default function NetworkSwitcher() {
         <div className="fixed top-0 left-0 right-0 z-50 bg-red-600 text-white p-3 flex items-center justify-center">
             <AlertCircle className="h-5 w-5 mr-2" />
             <span>
-                Connected to wrong network. Please switch to Morph Holesky Testnet.
+                Connected to wrong network. Please switch to Base Sepolia.
             </span>
             <button
                 onClick={handleSwitchNetwork}

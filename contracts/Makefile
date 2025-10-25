@@ -11,7 +11,7 @@ RED := \033[31m
 RESET := \033[0m
 
 # Variables
-NETWORK ?= morph-holesky
+NETWORK ?= base-sepolia
 ADMIN_ADDRESS ?= $(shell cast wallet address --private-key $(PRIVATE_KEY) 2>/dev/null || echo "")
 
 .PHONY: help install build test clean deploy verify setup local-deploy test-deploy format lint gas-report coverage
@@ -24,13 +24,13 @@ help: ## Show this help message
 	@echo ""
 	@echo "$(YELLOW)Environment Variables:$(RESET)"
 	@echo "  PRIVATE_KEY     - Private key for deployment (required)"
-	@echo "  NETWORK         - Target network (default: morph-holesky)"
+	@echo "  NETWORK         - Target network (default: base-sepolia)"
 	@echo "  ADMIN_ADDRESS   - Admin address (default: deployer address)"
 	@echo ""
 	@echo "$(YELLOW)Examples:$(RESET)"
-	@echo "  make deploy NETWORK=morph-holesky"
+	@echo "  make deploy NETWORK=base-sepolia"
 	@echo "  make test-deploy"
-	@echo "  make verify NETWORK=morph-holesky"
+	@echo "  make verify NETWORK=base-sepolia"
 
 install: ## Install dependencies
 	@echo "$(CYAN)Installing dependencies...$(RESET)"
@@ -102,7 +102,7 @@ local-deploy: ## Deploy to local network
 	@echo "$(GREEN)✅ Local deployment completed!$(RESET)"
 
 # Network deployment commands
-deploy: ## Deploy to specified network (usage: make deploy NETWORK=morph-holesky)
+deploy: ## Deploy to specified network (usage: make deploy NETWORK=base-sepolia)
 	@echo "$(CYAN)Deploying to $(NETWORK)...$(RESET)"
 	@if [ -z "$(PRIVATE_KEY)" ]; then \
 		echo "$(RED)❌ Error: PRIVATE_KEY not set$(RESET)"; \
@@ -111,7 +111,7 @@ deploy: ## Deploy to specified network (usage: make deploy NETWORK=morph-holesky
 	./deploy.sh $(NETWORK) --verify
 	@echo "$(GREEN)✅ Deployment to $(NETWORK) completed!$(RESET)"
 
-deploy-setup: ## Deploy and run setup (usage: make deploy-setup NETWORK=morph-holesky)
+deploy-setup: ## Deploy and run setup (usage: make deploy-setup NETWORK=base-sepolia)
 	@echo "$(CYAN)Deploying to $(NETWORK) with setup...$(RESET)"
 	@if [ -z "$(PRIVATE_KEY)" ]; then \
 		echo "$(RED)❌ Error: PRIVATE_KEY not set$(RESET)"; \
@@ -120,7 +120,7 @@ deploy-setup: ## Deploy and run setup (usage: make deploy-setup NETWORK=morph-ho
 	./deploy.sh $(NETWORK) --verify --setup
 	@echo "$(GREEN)✅ Deployment with setup to $(NETWORK) completed!$(RESET)"
 
-test-deploy: ## Deploy to testnet with test data (usage: make test-deploy NETWORK=morph-holesky)
+test-deploy: ## Deploy to testnet with test data (usage: make test-deploy NETWORK=base-sepolia)
 	@echo "$(CYAN)Deploying to $(NETWORK) with test data...$(RESET)"
 	@if [ -z "$(PRIVATE_KEY)" ]; then \
 		echo "$(RED)❌ Error: PRIVATE_KEY not set$(RESET)"; \
@@ -140,11 +140,11 @@ verify: ## Verify deployed contract (usage: make verify NETWORK=sepolia CONTRACT
 	@echo "$(GREEN)✅ Contract verification completed!$(RESET)"
 
 # Quick deployment commands for different networks
-morph-holesky: ## Deploy to Morph Holesky testnet
-	@$(MAKE) deploy NETWORK=morph-holesky
+base-sepolia: ## Deploy to Base Sepolia testnet
+	@$(MAKE) deploy NETWORK=base-sepolia
 
-morph: ## Deploy to Morph Holesky testnet (alias)
-	@$(MAKE) deploy NETWORK=morph-holesky
+base: ## Deploy to Base Sepolia testnet (alias)
+	@$(MAKE) deploy NETWORK=base-sepolia
 
 # Development workflow commands
 dev-setup: build test ## Build and test (development setup)

@@ -1,11 +1,11 @@
 #!/bin/bash
 
-# Morph Configuration Verification Script
-# This script verifies that all configurations are properly set for Morph deployment
+# Base Sepolia Configuration Verification Script
+# This script verifies that all configurations are properly set for Base Sepolia deployment
 
 set -e
 
-echo "🔍 Verifying Morph Configuration..."
+echo "🔍 Verifying Base Sepolia Configuration..."
 echo "=================================="
 
 # Colors
@@ -39,36 +39,36 @@ else
     echo -e "${GREEN}✅ PRIVATE_KEY is set${NC}"
 fi
 
-# Check Morph RPC URL
-if [ -z "$MORPH_HOLESKY_RPC_URL" ]; then
-    echo -e "${YELLOW}⚠️  MORPH_HOLESKY_RPC_URL not set, using default${NC}"
-    MORPH_HOLESKY_RPC_URL="https://rpc-holesky.morphl2.io"
+# Check Base Sepolia RPC URL
+if [ -z "$BASE_SEPOLIA_RPC_URL" ]; then
+    echo -e "${YELLOW}⚠️  BASE_SEPOLIA_RPC_URL not set, using default${NC}"
+    BASE_SEPOLIA_RPC_URL="https://sepolia.base.org"
 else
-    echo -e "${GREEN}✅ MORPH_HOLESKY_RPC_URL is set: $MORPH_HOLESKY_RPC_URL${NC}"
+    echo -e "${GREEN}✅ BASE_SEPOLIA_RPC_URL is set: $BASE_SEPOLIA_RPC_URL${NC}"
 fi
 
-# Test connection to Morph RPC
-echo -e "${BLUE}🔗 Testing connection to Morph Holesky...${NC}"
+# Test connection to Base Sepolia RPC
+echo -e "${BLUE}🔗 Testing connection to Base Sepolia...${NC}"
 if curl -s -X POST -H "Content-Type: application/json" \
     --data '{"jsonrpc":"2.0","method":"eth_chainId","params":[],"id":1}' \
-    "$MORPH_HOLESKY_RPC_URL" > /dev/null; then
+    "$BASE_SEPOLIA_RPC_URL" > /dev/null; then
     
     # Get chain ID
     CHAIN_ID=$(curl -s -X POST -H "Content-Type: application/json" \
         --data '{"jsonrpc":"2.0","method":"eth_chainId","params":[],"id":1}' \
-        "$MORPH_HOLESKY_RPC_URL" | grep -o '"result":"[^"]*"' | cut -d'"' -f4)
+        "$BASE_SEPOLIA_RPC_URL" | grep -o '"result":"[^"]*"' | cut -d'"' -f4)
     
     # Convert hex to decimal
     CHAIN_ID_DEC=$((16#${CHAIN_ID#0x}))
     
-    if [ "$CHAIN_ID_DEC" = "2810" ]; then
-        echo -e "${GREEN}✅ Connected to Morph Holesky (Chain ID: $CHAIN_ID_DEC)${NC}"
+    if [ "$CHAIN_ID_DEC" = "84532" ]; then
+        echo -e "${GREEN}✅ Connected to Base Sepolia (Chain ID: $CHAIN_ID_DEC)${NC}"
     else
-        echo -e "${RED}❌ Wrong chain ID: $CHAIN_ID_DEC (expected 2810)${NC}"
+        echo -e "${RED}❌ Wrong chain ID: $CHAIN_ID_DEC (expected 84532)${NC}"
         exit 1
     fi
 else
-    echo -e "${RED}❌ Cannot connect to Morph RPC${NC}"
+    echo -e "${RED}❌ Cannot connect to Base Sepolia RPC${NC}"
     exit 1
 fi
 
@@ -90,16 +90,16 @@ else
 fi
 
 echo ""
-echo -e "${GREEN}🎉 Morph Configuration Verification Complete!${NC}"
+echo -e "${GREEN}🎉 Base Sepolia Configuration Verification Complete!${NC}"
 echo "============================================="
 echo ""
 echo -e "${BLUE}📋 Configuration Summary:${NC}"
-echo "  Network: Morph Holesky Testnet"
-echo "  Chain ID: 2810"
-echo "  RPC URL: $MORPH_HOLESKY_RPC_URL"
+echo "  Network: Base Sepolia Testnet"
+echo "  Chain ID: 84532"
+echo "  RPC URL: $BASE_SEPOLIA_RPC_URL"
 echo "  Private Key: ${PRIVATE_KEY:+Set}${PRIVATE_KEY:-Not Set}"
 echo ""
 echo -e "${BLUE}🚀 Ready to deploy!${NC}"
-echo "  Run: ./deploy.sh morph-holesky --verify"
-echo "  Or:  make morph-holesky"
+echo "  Run: ./deploy_base.sh"
+echo "  Or:  make base-sepolia"
 echo ""
