@@ -429,7 +429,7 @@ export default function ArtifactScanner() {
         <div className="space-y-6">
             {/* Header */}
             <div className="text-center">
-                <div className="w-16 h-16 bg-green-600 rounded-full flex items-center justify-center mx-auto mb-4 animate-float">
+                <div className="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center mx-auto mb-4 animate-float">
                     <QrCode size={32} className="text-white" />
                 </div>
                 <h2 className="text-xl font-bold mb-2">Enhanced Scan & Discover</h2>
@@ -464,17 +464,17 @@ export default function ArtifactScanner() {
                         </div>
                         <button
                             onClick={requestLocation}
-                            className="w-full flex items-center justify-center gap-2 py-2 px-3 rounded-lg text-sm font-medium bg-green-600 hover:bg-green-700 text-white transition-colors"
+                            className="w-full flex items-center justify-center gap-2 py-2 px-3 rounded-lg text-sm font-medium bg-blue-600 hover:bg-blue-700 text-white transition-colors"
                         >
                             <RefreshCw size={16} />
                             Retry Location
                         </button>
                     </div>
                 ) : location ? (
-                    <div className="flex items-center gap-2 p-3 bg-green-900/20 rounded-lg">
-                        <CheckCircle size={16} className="text-green-400" />
+                    <div className="flex items-center gap-2 p-3 bg-blue-900/20 rounded-lg">
+                        <CheckCircle size={16} className="text-blue-400" />
                         <div className="flex-1">
-                            <p className="text-sm font-medium text-green-400">Location acquired</p>
+                            <p className="text-sm font-medium text-blue-400">Location acquired</p>
                             <p className="text-xs text-gray-400">
                                 {location.lat.toFixed(6)}, {location.lng.toFixed(6)}
                             </p>
@@ -483,7 +483,7 @@ export default function ArtifactScanner() {
                 ) : (
                     <button
                         onClick={requestLocation}
-                        className="w-full flex items-center justify-center gap-2 py-3 px-4 bg-green-600 hover:bg-green-700 text-white rounded-lg transition-colors"
+                        className="w-full flex items-center justify-center gap-2 py-3 px-4 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors"
                     >
                         <MapPin size={16} />
                         Get Location
@@ -521,7 +521,7 @@ export default function ArtifactScanner() {
                         {/* Scanning Overlay */}
                         <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
                             <div className={`w-48 h-48 border-2 rounded-lg transition-all duration-500 ${isScanning
-                                ? 'border-green-400 animate-pulse scale-110 shadow-lg shadow-green-400/50'
+                                ? 'border-blue-400 animate-pulse scale-110 shadow-lg shadow-blue-400/50'
                                 : 'border-white/70 shadow-lg shadow-white/20'
                                 }`}>
                                 {/* Corner indicators */}
@@ -532,7 +532,7 @@ export default function ArtifactScanner() {
 
                                 {/* Center dot */}
                                 <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-                                    <div className={`w-2 h-2 rounded-full ${isScanning ? 'bg-green-400 animate-ping' : 'bg-white/50'
+                                    <div className={`w-2 h-2 rounded-full ${isScanning ? 'bg-blue-400 animate-ping' : 'bg-white/50'
                                         }`}></div>
                                 </div>
                             </div>
@@ -583,13 +583,13 @@ export default function ArtifactScanner() {
                     {/* Show captured image */}
                     {capturedImage && (
                         <div className="space-y-2">
-                            <p className="text-sm text-green-400 font-medium">Photo captured successfully!</p>
+                            <p className="text-sm text-blue-400 font-medium">Photo captured successfully!</p>
                             <Image
                                 src={capturedImage}
                                 alt="Captured"
                                 width={400}
                                 height={128}
-                                className="w-full max-h-32 object-cover rounded-lg border border-green-500/30"
+                                className="w-full max-h-32 object-cover rounded-lg border border-blue-500/30"
                             />
                             <div className="flex gap-2">
                                 <a
@@ -626,20 +626,20 @@ export default function ArtifactScanner() {
             {/* AI Environment Analysis */}
             <div className="card">
                 <h3 className="font-bold mb-3 flex items-center gap-2">
-                    <Brain size={16} className="text-green-400" />
+                    <Brain size={16} className="text-blue-400" />
                     AI Environment Analysis
                 </h3>
 
                 {isAnalyzing ? (
-                    <div className="flex items-center gap-2 p-3 bg-green-900/20 rounded-lg">
-                        <Loader2 size={16} className="animate-spin text-green-400" />
-                        <p className="text-sm text-green-400">Analyzing environment with AI...</p>
+                    <div className="flex items-center gap-2 p-3 bg-blue-900/20 rounded-lg">
+                        <Loader2 size={16} className="animate-spin text-blue-400" />
+                        <p className="text-sm text-blue-400">Analyzing environment with AI...</p>
                     </div>
                 ) : environmentDetection ? (
                     <div className="space-y-3">
-                        <div className="bg-green-900/20 rounded-lg p-4">
+                        <div className="bg-blue-900/20 rounded-lg p-4">
                             <div className="flex items-center justify-between mb-2">
-                                <h4 className="font-medium text-green-400 capitalize">
+                                <h4 className="font-medium text-blue-400 capitalize">
                                     {environmentDetection.environment}
                                 </h4>
                                 <span className={`text-sm font-medium ${getConfidenceColor(environmentDetection.confidence)}`}>
@@ -661,7 +661,7 @@ export default function ArtifactScanner() {
                                                 setSelectedArtifactType(artifactType as ArtifactType);
                                             }}
                                             className={`px-3 py-1 rounded-lg text-xs font-medium transition-all ${artifactTypes[getArtifactTypeFromName(artifact)]?.name === artifact
-                                                ? 'bg-green-600 text-white'
+                                                ? 'bg-blue-600 text-white'
                                                 : 'bg-gray-700 text-gray-300 hover:bg-gray-600'
                                                 }`}
                                         >
@@ -713,7 +713,7 @@ export default function ArtifactScanner() {
             {/* Touch Grass Action */}
             <div className="card-forest">
                 <h3 className="font-bold mb-3 flex items-center gap-2">
-                    <Zap size={16} className="text-green-400" />
+                    <Zap size={16} className="text-blue-400" />
                     Touch Grass
                 </h3>
                 <p className="text-sm text-slate-300 mb-4">
@@ -725,12 +725,12 @@ export default function ArtifactScanner() {
                     const validation = canTouchGrass();
                     return (
                         <div className={`p-3 rounded-lg mb-3 text-sm ${validation.canTouch
-                            ? 'bg-green-900/20 border border-green-500/30 text-green-400'
+                            ? 'bg-blue-900/20 border border-blue-500/30 text-blue-400'
                             : 'bg-gray-900/20 border border-gray-500/30 text-gray-400'
                             }`}>
                             <div className="flex items-center gap-2">
                                 {validation.canTouch ? (
-                                    <CheckCircle size={16} className="text-green-400" />
+                                    <CheckCircle size={16} className="text-blue-400" />
                                 ) : (
                                     <AlertCircle size={16} className="text-gray-400" />
                                 )}
@@ -816,14 +816,14 @@ export default function ArtifactScanner() {
 
             {/* Scan Result */}
             {scanResult && (
-                <div className={`card ${scanResult.success ? 'border-green-500/50' : 'border-gray-500/50'}`}>
+                <div className={`card ${scanResult.success ? 'border-blue-500/50' : 'border-gray-500/50'}`}>
                     <div className="flex items-center gap-2 mb-2">
                         {scanResult.success ? (
-                            <CheckCircle size={16} className="text-green-400" />
+                            <CheckCircle size={16} className="text-blue-400" />
                         ) : (
                             <AlertCircle size={16} className="text-gray-300" />
                         )}
-                        <span className={`font-medium ${scanResult.success ? 'text-green-400' : 'text-gray-300'}`}>
+                        <span className={`font-medium ${scanResult.success ? 'text-blue-400' : 'text-gray-300'}`}>
                             {scanResult.success ? 'Success!' : 'Error'}
                         </span>
                     </div>
@@ -848,8 +848,8 @@ export default function ArtifactScanner() {
                     <p><strong>Smart Retry:</strong> Automatic fallback systems for camera, location, and AI services</p>
                 </div>
 
-                <div className="mt-4 p-3 bg-green-800/30 rounded-lg border border-green-500/30">
-                    <p className="text-xs text-green-400">
+                <div className="mt-4 p-3 bg-blue-800/30 rounded-lg border border-blue-500/30">
+                    <p className="text-xs text-blue-400">
                         <strong>Gemini AI Active:</strong> Advanced AI environment analysis is enabled with your API key.
                         The system will analyze your photos with Google Gemini Vision for accurate artifact suggestions.
                     </p>

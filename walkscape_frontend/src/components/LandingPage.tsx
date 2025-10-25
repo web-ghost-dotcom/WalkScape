@@ -28,12 +28,12 @@ export default function LandingPage() {
 
     const features = [
         {
-            icon: <MapPin className="w-8 h-8 text-green-400" />,
+            icon: <MapPin className="w-8 h-8 text-blue-400" />,
             title: "Explore & Discover",
             description: "Turn every walk into an adventure. Discover hidden artifacts and unlock new biomes as you explore the real world."
         },
         {
-            icon: <TreePine className="w-8 h-8 text-green-300" />,
+            icon: <TreePine className="w-8 h-8 text-blue-300" />,
             title: "Collect Companions",
             description: "Find and nurture magical pets that accompany you on your journey. Each companion has unique abilities and traits."
         },
@@ -63,7 +63,7 @@ export default function LandingPage() {
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="flex justify-between items-center h-16">
                         <div className="flex items-center space-x-2">
-                            <div className="w-8 h-8 bg-green-500 rounded-lg flex items-center justify-center">
+                            <div className="w-8 h-8 bg-blue-500 rounded-lg flex items-center justify-center">
                                 <TreePine className="w-5 h-5 text-white" />
                             </div>
                             <span className="text-xl font-bold">WalkScape</span>
@@ -85,14 +85,14 @@ export default function LandingPage() {
 
             {/* Hero Section */}
             <section className="relative pt-20 pb-32 overflow-hidden">
-                <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-green-900/20 via-slate-950 to-slate-950"></div>
+                <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-blue-900/20 via-slate-950 to-slate-950"></div>
 
                 <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="grid lg:grid-cols-2 gap-12 items-center">
                         <div className="text-center lg:text-left">
                             <h1 className="text-5xl lg:text-7xl font-bold mb-6">
                                 <span className="block text-white">Explore.</span>
-                                <span className="block text-green-400">Discover.</span>
+                                <span className="block text-blue-400">Discover.</span>
                                 <span className="block text-gray-300">Earn.</span>
                             </h1>
 
@@ -135,7 +135,7 @@ export default function LandingPage() {
                             <div className="relative bg-slate-800 rounded-3xl p-8 shadow-2xl border border-slate-700">
                                 <div className="bg-slate-900 rounded-2xl p-6 mb-6">
                                     <div className="flex items-center gap-3 mb-4">
-                                        <div className="w-12 h-12 bg-green-500 rounded-full flex items-center justify-center">
+                                        <div className="w-12 h-12 bg-blue-500 rounded-full flex items-center justify-center">
                                             <MapPin className="w-6 h-6 text-white" />
                                         </div>
                                         <div>
@@ -146,10 +146,10 @@ export default function LandingPage() {
                                     <div className="bg-slate-800 rounded-lg p-4">
                                         <div className="flex justify-between items-center mb-2">
                                             <span className="text-sm text-slate-300">Progress</span>
-                                            <span className="text-sm text-green-400">75%</span>
+                                            <span className="text-sm text-blue-400">75%</span>
                                         </div>
                                         <div className="w-full bg-slate-700 rounded-full h-2">
-                                            <div className="bg-green-400 h-2 rounded-full" style={{ width: '75%' }}></div>
+                                            <div className="bg-blue-400 h-2 rounded-full" style={{ width: '75%' }}></div>
                                         </div>
                                     </div>
                                 </div>
@@ -185,7 +185,7 @@ export default function LandingPage() {
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="text-center mb-16">
                         <h2 className="text-4xl lg:text-5xl font-bold mb-6">
-                            Why Choose <span className="text-green-400">WalkScape</span>?
+                            Why Choose <span className="text-blue-400">WalkScape</span>?
                         </h2>
                         <p className="text-xl text-slate-300 max-w-3xl mx-auto">
                             Experience the perfect blend of fitness, gaming, and blockchain technology.
@@ -199,7 +199,7 @@ export default function LandingPage() {
                                 <div
                                     key={index}
                                     className={`p-6 rounded-2xl border cursor-pointer transition-all duration-300 ${activeFeature === index
-                                        ? 'bg-slate-800 border-green-500 shadow-lg shadow-green-500/20'
+                                        ? 'bg-slate-800 border-blue-500 shadow-lg shadow-blue-500/20'
                                         : 'bg-slate-800/50 border-slate-700 hover:border-slate-600'
                                         }`}
                                     onClick={() => setActiveFeature(index)}
@@ -229,11 +229,11 @@ export default function LandingPage() {
                                 </p>
                                 <div className="flex gap-4">
                                     <div className="flex items-center gap-2 text-sm text-slate-400">
-                                        <div className="w-2 h-2 bg-green-400 rounded-full"></div>
+                                        <div className="w-2 h-2 bg-blue-400 rounded-full"></div>
                                         iOS Compatible
                                     </div>
                                     <div className="flex items-center gap-2 text-sm text-slate-400">
-                                        <div className="w-2 h-2 bg-green-400 rounded-full"></div>
+                                        <div className="w-2 h-2 bg-blue-400 rounded-full"></div>
                                         Android Ready
                                     </div>
                                 </div>
@@ -262,7 +262,7 @@ export default function LandingPage() {
                                 step: "01",
                                 title: "Connect Wallet",
                                 description: "Link your wallet to securely store your progress, artifacts, and earnings on Base.",
-                                icon: <Shield className="w-12 h-12 text-green-400" />
+                                icon: <Shield className="w-12 h-12 text-blue-400" />
                             },
                             {
                                 step: "02",
@@ -323,7 +323,7 @@ export default function LandingPage() {
                                 description: "Follow for updates, community highlights, and exciting announcements.",
                                 members: "1K+ Followers",
                                 link: "#",
-                                color: "text-green-400"
+                                color: "text-blue-400"
                             }
                         ].map((community, index) => (
                             <div key={index} className="bg-slate-800 rounded-2xl p-6 border border-slate-700 hover:border-slate-600 transition-colors">
@@ -348,7 +348,7 @@ export default function LandingPage() {
             <section className="py-24">
                 <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
                     <h2 className="text-4xl lg:text-5xl font-bold mb-6">
-                        Ready to <span className="text-green-400">Explore</span>?
+                        Ready to <span className="text-blue-400">Explore</span>?
                     </h2>
                     <p className="text-xl text-slate-300 mb-8">
                         Your adventure awaits. Connect your wallet and start discovering the world around you.
@@ -367,7 +367,7 @@ export default function LandingPage() {
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="flex flex-col md:flex-row justify-between items-center">
                         <div className="flex items-center space-x-2 mb-4 md:mb-0">
-                            <div className="w-8 h-8 bg-green-500 rounded-lg flex items-center justify-center">
+                            <div className="w-8 h-8 bg-blue-500 rounded-lg flex items-center justify-center">
                                 <TreePine className="w-5 h-5 text-white" />
                             </div>
                             <span className="text-xl font-bold">WalkScape</span>

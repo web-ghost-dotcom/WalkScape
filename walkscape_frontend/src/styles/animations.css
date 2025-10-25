@@ -1,4 +1,4 @@
-/* animations.css - Enhanced animations for WalkScape */
+/* animations.css - Modern smooth animations for WalkScape */
 
 /* Entrance animations */
 @keyframes fadeIn {
@@ -14,7 +14,7 @@
 @keyframes slideInUp {
     from {
         opacity: 0;
-        transform: translateY(20px);
+        transform: translateY(30px);
     }
 
     to {
@@ -26,7 +26,7 @@
 @keyframes slideInLeft {
     from {
         opacity: 0;
-        transform: translateX(-20px);
+        transform: translateX(-30px);
     }
 
     to {
@@ -38,12 +38,24 @@
 @keyframes slideInRight {
     from {
         opacity: 0;
-        transform: translateX(20px);
+        transform: translateX(30px);
     }
 
     to {
         opacity: 1;
         transform: translateX(0);
+    }
+}
+
+@keyframes scaleIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
     }
 }
 
@@ -53,10 +65,12 @@
     0%,
     100% {
         transform: scale(1);
+        opacity: 1;
     }
 
     50% {
-        transform: scale(1.05);
+        transform: scale(1.03);
+        opacity: 0.9;
     }
 }
 
@@ -68,7 +82,7 @@
     }
 
     50% {
-        transform: translateY(-5px);
+        transform: translateY(-8px);
     }
 }
 
@@ -92,39 +106,68 @@
     }
 }
 
-/* Animation utility classes */
+@keyframes glow {
+
+    0%,
+    100% {
+        box-shadow: 0 0 20px rgba(37, 99, 235, 0.3);
+    }
+
+    50% {
+        box-shadow: 0 0 30px rgba(37, 99, 235, 0.6);
+    }
+}
+
+/* Animation utility classes with smooth easing */
 .animate-fade-in {
-    animation: fadeIn 0.5s ease-out forwards;
+    animation: fadeIn 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
 }
 
 .animate-slide-up {
-    animation: slideInUp 0.5s ease-out forwards;
+    animation: slideInUp 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
 }
 
 .animate-slide-left {
-    animation: slideInLeft 0.5s ease-out forwards;
+    animation: slideInLeft 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
 }
 
 .animate-slide-right {
-    animation: slideInRight 0.5s ease-out forwards;
+    animation: slideInRight 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.animate-scale-in {
+    animation: scaleIn 0.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
 }
 
 .animate-pulse {
-    animation: pulse 2s ease-in-out infinite;
+    animation: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 }
 
 .animate-bob {
-    animation: bobUpDown 2s ease-in-out infinite;
+    animation: bobUpDown 3s ease-in-out infinite;
 }
 
 .animate-shimmer {
-    background: linear-gradient(90deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0));
+    background: linear-gradient(90deg, rgba(96, 165, 250, 0), rgba(96, 165, 250, 0.15), rgba(96, 165, 250, 0));
     background-size: 200% 100%;
     animation: shimmer 3s infinite linear;
 }
 
 .animate-rotate {
-    animation: rotate 5s linear infinite;
+    animation: rotate 8s linear infinite;
+}
+
+.animate-glow {
+    animation: glow 2s ease-in-out infinite;
+}
+
+/* Smooth transition classes */
+.transition-smooth {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.transition-smooth-slow {
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* Staggered animation delays */
@@ -146,6 +189,18 @@
 
 .delay-500 {
     animation-delay: 500ms;
+}
+
+.delay-600 {
+    animation-delay: 600ms;
+}
+
+.delay-700 {
+    animation-delay: 700ms;
+}
+
+.delay-800 {
+    animation-delay: 800ms;
 }
 
 /* Responsive animation adjustments */

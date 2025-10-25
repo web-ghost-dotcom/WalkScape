@@ -17,88 +17,76 @@
 }
 
 :root {
-  /* Professional color palette - Green, White, Gray focus */
-  --forest-dark: #1a2f1a;
-  --forest-green: #2d5a2d;
-  --forest-light: #4a7c59;
-  --grass-green: #6b8e23;
-  --leaf-green: #9acd32;
-  --earth-gray: #696969;
-  --stone-gray: #808080;
-  --light-gray: #a8a8a8;
-  --dark-gray: #2a2a2a;
-  --charcoal: #36454f;
-  --silver: #c0c0c0;
-  --moss-green: #addfad;
+  /* Modern Blue Palette - Clean and Professional */
+  --primary-blue: #2563eb;
+  --primary-blue-hover: #1d4ed8;
+  --primary-blue-light: #3b82f6;
+  --accent-blue: #60a5fa;
+  --dark-blue: #1e40af;
+  --background-dark: #0f172a;
+  --background-card: #1e293b;
+  --background-hover: #334155;
+  --text-primary: #f8fafc;
+  --text-secondary: #cbd5e1;
+  --border-color: #475569;
+  --border-light: #64748b;
 }
 
 @layer base {
   body {
     font-family: 'Inter', system-ui, sans-serif;
-    background: linear-gradient(135deg, var(--forest-dark) 0%, #1e293b 100%);
-    color: #f8fafc;
+    background: var(--background-dark);
+    color: var(--text-primary);
   }
 }
 
 @layer components {
   .btn-primary {
-    @apply bg-green-600 hover:bg-green-700 text-white font-medium py-2 px-4 rounded-lg transition-all duration-200 shadow-md hover:shadow-lg;
+    @apply bg-blue-600 hover:bg-blue-700 text-white font-medium py-2.5 px-6 rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105 active:scale-95;
   }
 
   .btn-secondary {
-    @apply bg-slate-600 hover:bg-slate-700 text-white font-medium py-2 px-4 rounded-lg transition-all duration-200;
+    @apply bg-slate-700 hover:bg-slate-600 text-white font-medium py-2.5 px-6 rounded-xl transition-all duration-300 hover:shadow-lg;
   }
 
   .card {
-    @apply bg-slate-800 border border-slate-700 rounded-xl p-6 shadow-xl;
+    @apply bg-slate-800 border border-slate-700 rounded-2xl p-6 shadow-xl transition-all duration-300 hover:shadow-2xl hover:border-slate-600;
   }
 
-  .card-forest {
-    @apply bg-green-900/50 border border-green-700/50 rounded-xl p-6 shadow-xl backdrop-blur-sm;
+  .card-blue {
+    @apply bg-slate-800 border border-blue-600/30 rounded-2xl p-6 shadow-xl backdrop-blur-sm transition-all duration-300 hover:border-blue-500/50;
   }
 
   .stat-card {
-    @apply bg-slate-800/80 border border-slate-600 rounded-lg p-4 backdrop-blur-sm;
+    @apply bg-slate-800/90 border border-slate-600 rounded-xl p-4 backdrop-blur-sm transition-all duration-300 hover:bg-slate-700/90 hover:border-blue-500/30;
   }
 
-  .nature-border {
-    @apply border-2 border-green-600/30 rounded-lg;
-  }
-
-  .grass-accent {
-    @apply text-green-400;
-  }
-
-  .earth-accent {
-    @apply text-gray-400;
-  }
-
-  .water-accent {
-    @apply text-gray-300;
+  .blue-accent {
+    @apply text-blue-400;
   }
 
   .navigation-tab {
-    @apply flex flex-col items-center p-3 rounded-lg transition-all duration-200 text-slate-400 hover:text-green-400 hover:bg-slate-800/50;
+    @apply flex flex-col items-center p-3 rounded-xl transition-all duration-300 text-slate-400 hover:text-blue-400 hover:bg-slate-800/50;
   }
 
   .navigation-tab.active {
-    @apply text-green-400 bg-green-900/30;
+    @apply text-blue-400 bg-blue-900/20 border border-blue-600/30;
   }
 
   .progress-bar {
-    @apply w-full bg-slate-700 rounded-full h-2 overflow-hidden;
+    @apply w-full bg-slate-700 rounded-full h-2.5 overflow-hidden;
   }
 
   .progress-fill {
-    @apply h-full bg-green-500 rounded-full transition-all duration-300;
+    @apply h-full bg-blue-500 rounded-full transition-all duration-500 ease-out;
   }
 
   .artifact-card {
-    @apply relative overflow-hidden rounded-lg border-2 transition-all duration-200 cursor-pointer;
+    @apply relative overflow-hidden rounded-xl border-2 transition-all duration-300 cursor-pointer hover:scale-105 hover:shadow-2xl;
   }
 
   .artifact-mushroom {
-    @apply border-green-500/50 bg-green-900/20 hover:border-green-400;
+    @apply border-blue-500/50 bg-blue-900/20 hover:border-blue-400;
   }
 
   .artifact-fossil {
@@ -106,7 +94,7 @@
   }
 
   .artifact-graffiti {
-    @apply border-green-600/50 bg-green-800/20 hover:border-green-500;
+    @apply border-blue-600/50 bg-blue-800/20 hover:border-blue-500;
   }
 
   .artifact-pixel {
@@ -114,7 +102,7 @@
   }
 
   .pet-card {
-    @apply bg-slate-800/90 border border-slate-600 rounded-xl p-4 hover:border-green-500/50 transition-all duration-200;
+    @apply bg-slate-800/90 border border-slate-600 rounded-xl p-4 hover:border-blue-500/50 transition-all duration-200;
   }
 
   .rarity-common {
@@ -126,11 +114,11 @@
   }
 
   .rarity-rare {
-    @apply text-green-400;
+    @apply text-blue-400;
   }
 
   .rarity-epic {
-    @apply text-green-300;
+    @apply text-blue-300;
   }
 
   .rarity-legendary {
@@ -147,7 +135,7 @@
   }
 
   .feature-card.active {
-    @apply bg-slate-800 border-green-500 shadow-lg shadow-green-500/20;
+    @apply bg-slate-800 border-blue-500 shadow-lg shadow-blue-500/20;
   }
 
   .stat-highlight {
@@ -155,7 +143,7 @@
   }
 
   .cta-button {
-    @apply bg-green-600 hover:bg-green-700 text-white font-semibold py-4 px-8 rounded-xl transition-all duration-200 shadow-lg hover:shadow-xl hover:scale-105;
+    @apply bg-blue-600 hover:bg-blue-700 text-white font-semibold py-4 px-8 rounded-xl transition-all duration-200 shadow-lg hover:shadow-xl hover:scale-105;
   }
 }
 
