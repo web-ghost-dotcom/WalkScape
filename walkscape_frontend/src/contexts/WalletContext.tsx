@@ -2,7 +2,8 @@
 
 import React, { createContext, useContext, useState, useEffect, useCallback } from 'react';
 import { BrowserProvider } from 'ethers';
-import { usePrivy, useWallets } from '@privy-io/react-auth';
+import { useAccount, useWalletClient, useDisconnect } from 'wagmi';
+import { useAppKit } from '@reown/appkit/react';
 import { getContract, PlayerStats } from '@/lib/web3';
 
 interface WalletContextType {
@@ -17,14 +18,16 @@ interface WalletContextType {
     checkRegistration: () => Promise<void>;
     refreshPlayerStats: () => Promise<void>;
     retryRegistrationCheck: () => Promise<void>;
-    switchToMorphNetwork: () => Promise<boolean>;
+    switchToBaseNetwork: () => Promise<boolean>;
 }
 
 const WalletContext = createContext<WalletContextType | null>(null);
 
 export function WalletProvider({ children }: { children: React.ReactNode }) {
-    const { ready, authenticated, user, login, logout } = usePrivy();
-    const { wallets } = useWallets();
+    const { address, isConnected, chain } = useAccount();
+    const { data: walletClient } = useWalletClient();
+    const { disconnect: wagmiDisconnect } = useDisconnect();
+    const { open } = useAppKit();
 
     const [provider, setProvider] = useState<BrowserProvider | null>(null);
     const [isRegistered, setIsRegistered] = useState(false);
@@ -35,67 +38,46 @@ export function WalletProvider({ children }: { children: React.ReactNode }) {
     const [registrationRetryCount, setRegistrationRetryCount] = useState(0);
     const maxRegistrationRetries = 3;
 
-    // Get the wallet address from Privy
-    const address = user?.wallet?.address || null;
-    const isConnected = ready && authenticated && !!address;
-
     // Initialize provider when wallet is connected
     useEffect(() => {
         const initializeProvider = async () => {
-            if (isConnected && wallets.length > 0) {
+            if (isConnected && walletClient) {
                 try {
-                    const wallet = wallets[0];
-                    console.log('Initializing provider for wallet:', wallet.walletClientType);
+                    console.log('Initializing provider for wallet');
 
-                    // Get the Ethereum provider
-                    const ethProvider = await wallet.getEthereumProvider();
-                    console.log('Got Ethereum provider:', ethProvider);
+                    // Get the transport from wallet client
+                    const transport = walletClient.transport;
 
-                    // Check if provider is valid before creating BrowserProvider
-                    if (ethProvider && typeof ethProvider === 'object' && 'request' in ethProvider) {
-                        try {
-                            // Create provider with ENS disabled since Morph doesn't support ENS
-                            const ethersProvider = new BrowserProvider(ethProvider, {
-                                // Disable ENS
-                                name: 'Morph Holesky Testnet',
-                                chainId: 2810,
-                                // Set to empty string instead of null for type safety
-                                ensAddress: ''  // Explicitly disable ENS
-                            });
+                    // Create ethers provider from wallet client
+                    const ethersProvider = new BrowserProvider(walletClient as any, {
+                        name: 'Base Sepolia',
+                        chainId: 84532,
+                    });
 
-                            // Verify we're on the correct network
-                            const network = await ethersProvider.getNetwork();
-                            console.log('Connected to network:', network);
+                    // Verify we're on the correct network
+                    const network = await ethersProvider.getNetwork();
+                    console.log('Connected to network:', network);
 
-                            if (network.chainId !== BigInt(2810)) {
-                                console.warn(`Connected to wrong network: ${network.chainId}. Expected: 2810`);
-                                // Don't set provider if on wrong network
-                                setProvider(null);
-                                return;
-                            }
-
-                            console.log('Created Ethers provider successfully');
-                            setProvider(ethersProvider);
-                        } catch (providerError) {
-                            console.error('Error creating BrowserProvider:', providerError);
-                            setProvider(null);
-                        }
-                    } else {
-                        console.warn('Invalid Ethereum provider received:', ethProvider);
+                    if (network.chainId !== BigInt(84532)) {
+                        console.warn(`Connected to wrong network: ${network.chainId}. Expected: 84532`);
                         setProvider(null);
+                        return;
                     }
+
+                    console.log('Created Ethers provider successfully');
+                    setProvider(ethersProvider);
                 } catch (error) {
                     console.error('Error initializing provider:', error);
                     setProvider(null);
                 }
             } else {
-                console.log('Not connected or no wallets available');
+                console.log('Not connected or no wallet client available');
                 setProvider(null);
             }
         };
 
         initializeProvider();
-    }, [isConnected, wallets]);
+    }, [isConnected, walletClient]);
 
     const checkPlayerRegistration = useCallback(async (playerAddress: string) => {
         if (!provider) return;
@@ -105,13 +87,12 @@ export function WalletProvider({ children }: { children: React.ReactNode }) {
 
             // First, verify we're on the right network
             const network = await provider.getNetwork();
-            if (network.chainId !== BigInt(2810)) {
-                console.error(`Connected to wrong network: ${network.chainId}. Expected: 2810`);
-                throw new Error(`Wrong network: ${network.chainId}. Please connect to Morph Holesky Testnet (2810)`);
+            if (network.chainId !== BigInt(84532)) {
+                console.error(`Connected to wrong network: ${network.chainId}. Expected: 84532`);
+                throw new Error(`Wrong network: ${network.chainId}. Please connect to Base Sepolia (84532)`);
             }
 
-            // Get signer and then contract
-            const signer = await provider.getSigner();
+            // Get contract
             const contract = getContract(provider);
 
             // Check if player is registered
@@ -128,13 +109,6 @@ export function WalletProvider({ children }: { children: React.ReactNode }) {
             }
         } catch (error) {
             console.error('Error checking player registration:', error);
-
-            // Check if this is an ENS error
-            const errorMessage = error instanceof Error ? error.message : String(error);
-            if (errorMessage.includes('ENS') || errorMessage.includes('UNSUPPORTED_OPERATION')) {
-                console.warn('ENS not supported on this network, continuing without ENS');
-                // We can still try to continue, but with retry logic
-            }
 
             if (registrationRetryCount < maxRegistrationRetries) {
                 console.log(`Registration check failed, retrying... (${registrationRetryCount + 1}/${maxRegistrationRetries})`);
@@ -153,21 +127,23 @@ export function WalletProvider({ children }: { children: React.ReactNode }) {
     // Check registration status when address changes
     useEffect(() => {
         if (address && provider) {
-            checkPlayerRegistration(address);
+            checkPlayerRegistration(address as string);
         } else {
             setIsRegistered(false);
             setPlayerStats(null);
             setRegistrationRetryCount(0);
         }
-    }, [address, provider, checkPlayerRegistration]); const fetchPlayerStats = async (playerAddress: string) => {
+    }, [address, provider, checkPlayerRegistration]);
+
+    const fetchPlayerStats = async (playerAddress: string) => {
         if (!provider) return;
 
         try {
             // Verify network before fetching stats
             const network = await provider.getNetwork();
-            if (network.chainId !== BigInt(2810)) {
-                console.error(`Connected to wrong network: ${network.chainId}. Expected: 2810`);
-                throw new Error(`Wrong network: ${network.chainId}. Please connect to Morph Holesky Testnet (2810)`);
+            if (network.chainId !== BigInt(84532)) {
+                console.error(`Connected to wrong network: ${network.chainId}. Expected: 84532`);
+                throw new Error(`Wrong network: ${network.chainId}. Please connect to Base Sepolia (84532)`);
             }
 
             const contract = getContract(provider);
@@ -187,21 +163,13 @@ export function WalletProvider({ children }: { children: React.ReactNode }) {
             setPlayerStats(playerStatsFormatted);
         } catch (error) {
             console.error('Error fetching player stats:', error);
-
-            // Handle ENS errors specifically
-            const errorMessage = error instanceof Error ? error.message : String(error);
-            if (errorMessage.includes('ENS') || errorMessage.includes('UNSUPPORTED_OPERATION')) {
-                console.warn('ENS not supported on this network, continuing without ENS');
-                // ENS issue but don't panic, we might still be able to use the app
-            }
-
             setPlayerStats(null);
         }
     };
 
     const connect = async () => {
         try {
-            await login();
+            await open();
         } catch (error) {
             console.error('Failed to connect wallet:', error);
         }
@@ -209,7 +177,7 @@ export function WalletProvider({ children }: { children: React.ReactNode }) {
 
     const disconnect = async () => {
         try {
-            await logout();
+            wagmiDisconnect();
             // Clear local state
             setProvider(null);
             setIsRegistered(false);
@@ -222,78 +190,38 @@ export function WalletProvider({ children }: { children: React.ReactNode }) {
 
     const checkRegistration = async () => {
         if (address) {
-            await checkPlayerRegistration(address);
+            await checkPlayerRegistration(address as string);
         }
     };
 
     const refreshPlayerStats = async () => {
         if (address && provider) {
-            await fetchPlayerStats(address);
+            await fetchPlayerStats(address as string);
         }
     };
 
     const retryRegistrationCheck = async () => {
         if (address) {
             setRegistrationRetryCount(0);
-            await checkPlayerRegistration(address);
+            await checkPlayerRegistration(address as string);
         }
     };
 
-    // Helper function to switch to Morph Holesky Testnet
-    const switchToMorphNetwork = async () => {
+    // Helper function to switch to Base Sepolia
+    const switchToBaseNetwork = async () => {
         if (!isConnected) {
             console.error('Not connected to any wallet');
             return false;
         }
 
         try {
-            // For wallets that support network switching
-            if (wallets.length > 0) {
-                const wallet = wallets[0];
-                if (wallet && wallet.getEthereumProvider) {
-                    const ethProvider = await wallet.getEthereumProvider();
-
-                    // Try to add and switch to Morph Holesky testnet
-                    try {
-                        await ethProvider.request({
-                            method: 'wallet_addEthereumChain',
-                            params: [
-                                {
-                                    chainId: '0xAFA', // 2810 in hex
-                                    chainName: 'Morph Holesky Testnet',
-                                    nativeCurrency: {
-                                        name: 'Ether',
-                                        symbol: 'ETH',
-                                        decimals: 18,
-                                    },
-                                    rpcUrls: [process.env.NEXT_PUBLIC_RPC_URL || 'https://rpc-holesky.morphl2.io'],
-                                    blockExplorerUrls: ['https://explorer-holesky.morphl2.io'],
-                                },
-                            ],
-                        });
-
-                        console.log('Successfully added Morph network');
-
-                        // Now switch to the network
-                        await ethProvider.request({
-                            method: 'wallet_switchEthereumChain',
-                            params: [{ chainId: '0xAFA' }], // 2810 in hex
-                        });
-
-                        console.log('Successfully switched to Morph network');
-                        return true;
-                    } catch (error) {
-                        console.error('Failed to switch network:', error);
-                        return false;
-                    }
-                }
-            }
+            // Open network modal
+            await open({ view: 'Networks' });
+            return true;
         } catch (error) {
             console.error('Error switching network:', error);
             return false;
         }
-
-        return false;
     };
 
     // Initialize loading state
@@ -315,7 +243,7 @@ export function WalletProvider({ children }: { children: React.ReactNode }) {
         checkRegistration,
         refreshPlayerStats,
         retryRegistrationCheck,
-        switchToMorphNetwork
+        switchToBaseNetwork
     };
 
     return (

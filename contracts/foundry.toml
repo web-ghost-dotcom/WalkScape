@@ -15,7 +15,7 @@ runs = 256
 
 # RPC endpoints for different networks
 [rpc_endpoints]
-morph_holesky_testnet = "https://rpc-holesky.morphl2.io"
+base_sepolia = "https://sepolia.base.org"
 local = "http://localhost:8545"
 
 

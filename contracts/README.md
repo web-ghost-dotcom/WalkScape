@@ -1,6 +1,6 @@
 # WalkScape Solidity Contracts
 
-A comprehensive blockchain-based gaming ecosystem built on Morph network, featuring player progression, collectible artifacts, virtual pets, social colonies, and staking mechanics.
+A comprehensive blockchain-based gaming ecosystem built on Base Sepolia network, featuring player progression, collectible artifacts, virtual pets, social colonies, and staking mechanics.
 
 ## 🌟 Features
 
@@ -16,7 +16,7 @@ A comprehensive blockchain-based gaming ecosystem built on Morph network, featur
 ### Prerequisites
 
 - [Foundry](https://getfoundry.sh/) installed
-- Morph network ETH tokens for deployment
+- Base Sepolia ETH tokens for deployment
 - Private key with deployment permissions
 
 ### Installation
@@ -44,9 +44,9 @@ Set your private key:
 export PRIVATE_KEY=0x...
 ```
 
-Deploy to Morph Holesky testnet:
+Deploy to Base Sepolia testnet:
 ```bash
-make morph-holesky
+make base-sepolia
 ```
 
 Or with test data:
@@ -62,7 +62,7 @@ make test-deploy
 | `make build` | Build the contracts |
 | `make test` | Run all tests |
 | `make deploy` | Deploy to specified network |
-| `make morph-holesky` | Deploy to Morph Holesky testnet |
+| `make base-sepolia` | Deploy to Base Sepolia testnet |
 | `make test-deploy` | Deploy with test data |
 | `make verify` | Verify deployed contract |
 | `make clean` | Clean build artifacts |
@@ -95,14 +95,14 @@ make coverage
 
 - `PRIVATE_KEY`: Private key for deployment (required)
 - `ADMIN_ADDRESS`: Admin address (optional, defaults to deployer)
-- `MORPH_API_KEY`: API key for contract verification (optional)
+- `BASESCAN_API_KEY`: API key for contract verification (optional)
 
 ### Network Configuration
 
-The contracts are configured for Morph Holesky testnet:
-- **RPC URL**: `https://rpc-holesky.morphl2.io`
-- **Chain ID**: `2810`
-- **Explorer**: `https://explorer-holesky.morphl2.io`
+The contracts are configured for Base Sepolia testnet:
+- **RPC URL**: `https://sepolia.base.org`
+- **Chain ID**: `84532`
+- **Explorer**: `https://sepolia.basescan.org`
 
 ## 📖 Contract Architecture
 
@@ -174,7 +174,7 @@ Main contract containing all game logic:
 
 After deployment, verify your contract:
 ```bash
-make verify CONTRACT_ADDRESS=0x... NETWORK=morph-holesky
+make verify CONTRACT_ADDRESS=0x... NETWORK=base-sepolia
 ```
 
 ## 🛠️ Development
@@ -256,8 +256,8 @@ export PRIVATE_KEY=0x...
 # Build and test
 make build test
 
-# Deploy to Morph Holesky testnet with verification
-make morph-holesky
+# Deploy to Base Sepolia testnet with verification
+make base-sepolia
 
 # Or deploy with test data for development
 make test-deploy
